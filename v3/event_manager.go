@@ -16,10 +16,6 @@ static inline int eventDetach(libvlc_event_manager_t* em, libvlc_event_type_t et
 */
 import "C"
 
-import (
-	"unsafe"
-)
-
 // EventManager wraps a libvlc event manager.
 type EventManager struct {
 	manager *C.libvlc_event_manager_t
@@ -55,17 +51,4 @@ func (em *EventManager) Detach(eventID EventID) {
 
 	inst.events.remove(eventID)
 	C.eventDetach(em.manager, C.libvlc_event_type_t(ctx.event), C.ulong(eventID))
-}
-
-//export eventDispatch
-func eventDispatch(event C.clibvlc_event_t, userData unsafe.Pointer) {
-	ctx, ok := inst.events.get(EventID(uintptr(userData)))
-	if !ok {
-		return
-	}
-	if ctx.callback == nil {
-		return
-	}
-
-	ctx.callback(ctx.event, ctx.userData)
 }
