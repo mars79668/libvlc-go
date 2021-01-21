@@ -5,7 +5,7 @@ package vlc
 #include <vlc/vlc.h>
 
 typedef const struct libvlc_event_t* clibvlc_event_t;
-extern void eventDispatch(clibvlc_event_t, void*);
+//extern void eventDispatch(clibvlc_event_t, void*);
 
 static inline int eventAttach(libvlc_event_manager_t* em, libvlc_event_type_t et, unsigned long userData) {
     return libvlc_event_attach(em, et, eventDispatch, (void*)userData);
