@@ -3,6 +3,9 @@ package vlc
 /*
 #cgo LDFLAGS: -lvlc
 #include <vlc/vlc.h>
+
+typedef const struct libvlc_event_t* clibvlc_event_t;
+
 */
 import "C"
 
